@@ -295,7 +295,8 @@
             e
           );
         };
-        var A = g() && null === window.localStorage.getItem("force-allow-mobile");
+        const Wc = g();
+        var A = Wc && null === window.localStorage.getItem("force-allow-mobile");
         class m {
           constructor(e) {
             if (((this.listeners = { any: [] }), (this.value = {}), e))
@@ -21585,6 +21586,7 @@
                     },
                   }),
                 null !== d && Object(Ul.jsx)(kc, { msg: d }),
+                Object(Ul.jsx)(Pc, {}),
                 Object(Ul.jsxs)("div", {
                   id: "update-alert",
                   onMouseDown: (e) => {
@@ -21697,6 +21699,56 @@
               ],
             });
           }),
+          Pc = () => {
+            const [e, t] = Object(s.useState)(() => {
+              if (!Wc || A) return !1;
+              try {
+                return !window.localStorage.getItem("mobile-warning-dismissed");
+              } catch (e) {
+                return !0;
+              }
+            });
+            return Wc && !A && e
+              ? Object(Ul.jsx)("div", {
+                  id: "mobile-warning-overlay",
+                  children: Object(Ul.jsxs)("div", {
+                    id: "mobile-warning-box",
+                    children: [
+                      Object(Ul.jsx)("div", {
+                        id: "mobile-warning-icon",
+                        children: "\u26a0\ufe0f",
+                      }),
+                      Object(Ul.jsx)("div", {
+                        id: "mobile-warning-title",
+                        children: "Mobile Device Detected",
+                      }),
+                      Object(Ul.jsx)("div", {
+                        id: "mobile-warning-message",
+                        children: "This game is best experienced on desktop with a keyboard. Mobile support is limited and may not provide the optimal experience.",
+                      }),
+                      Object(Ul.jsx)("div", {
+                        id: "mobile-warning-button",
+                        onMouseDown: () => {
+                          try {
+                            window.localStorage.setItem("mobile-warning-dismissed", "1");
+                          } catch (e) {}
+                          t(!1);
+                        },
+                        onTouchStart: () => {
+                          try {
+                            window.localStorage.setItem("mobile-warning-dismissed", "1");
+                          } catch (e) {}
+                          t(!1);
+                        },
+                        role: "button",
+                        tabIndex: 0,
+                        children: "I understand, continue anyway",
+                      }),
+                    ],
+                  }),
+                })
+              : null;
+          },
           Nc = ({ loadProgress: e }) =>
             Object(Ul.jsx)("div", {
               id: "live-loader-bg",
